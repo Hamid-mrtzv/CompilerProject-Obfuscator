@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'antlr'
 }
 
 group = 'org.example'
@@ -10,10 +11,16 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    antlr 'org.antlr:antlr4:4.13.1'
+    implementation 'org.antlr:antlr4-runtime:4.13.1'
 }
 
-test {
-    useJUnitPlatform()
+generateGrammarSource {
+    maxHeapSize = "64m"
+    arguments += ['-visitor']
+    outputDirectory = file("build/generated-src/antlr/main")
 }
+
+sourceSets.main.java.srcDirs += 'build/generated-src/antlr/main'
+
+compileJava.dependsOn generateGrammarSource
