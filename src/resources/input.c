@@ -1,12 +1,9 @@
 #include <stdio.h>
-int sum(int a, int b) {
-    int result = a + b;
-    return result;
-}
 int main() {
-    int x = 3;
-    int y = 4;
-    int total = sum(x, y);
-    printf("%d\n", total);
+    int sum = 0;
+    for (int i = 1; i <= 10; i = i + 1) {
+        sum = sum + i;
+    }
+    printf("%d\n", sum);
     return 0;
 }
